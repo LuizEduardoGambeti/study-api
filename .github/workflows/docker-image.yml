@@ -1,0 +1,22 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: docker login
+      run: docker login -u gambeti -p dckr_pat_63Q-9rTYolsMgZd2ii55HQZVJVk
+    - name: build image
+      run: docker build -t gambeti/study-api .
+    - name: push to docker
+      run: docker push gambeti/study-api
